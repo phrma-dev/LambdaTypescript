@@ -3,17 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/cache": "11.10.3",
+    "@emotion/react": "11.10.4",
+    "@emotion/server": "11.10.0",
+    "@emotion/styled": "11.10.4",
     "bootstrap": "~4.6.1",
     "jquery": "~3.6.0",
     "merge": "^2.1.1",
+    "next": "12.3.0",
     "oidc-client": "~1.11.5",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "prettier": "^2.7.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-router": "~5.2.1",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "~5.3.0",
     "reactstrap": "~8.10.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "@mui/icons-material": "5.10.3",
+    "@mui/lab": "5.0.0-alpha.99",
+    "@mui/material": "5.10.5",
+    "@mui/system": "5.10.5",
+    "@mui/x-date-pickers": "5.0.1"
   },
   "devDependencies": {
     "ajv": "^6.9.1",
@@ -32,7 +43,8 @@
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "prettier": "echo '\nCorrecting styles...' && prettier --write \"src/**/*.{js,ts,tsx,scss}\""
   },
   "browserslist": {
     "production": [

@@ -1,0 +1,17 @@
+{
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "overrides": [
+        {
+            "files": "*.scss, *.tsx",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
