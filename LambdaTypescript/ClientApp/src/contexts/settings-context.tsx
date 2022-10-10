@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 

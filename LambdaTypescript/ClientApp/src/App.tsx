@@ -1,9 +1,12 @@
-import type { FC } from 'react';
+import React, { FC } from 'react';
 import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
+import { Toaster } from 'react-hot-toast';
+import { Provider as ReduxProvider } from 'react-redux';
+import nProgress from 'nprogress';
 import { CacheProvider } from '@emotion/react';
 import type { EmotionCache } from '@emotion/cache';
 import { ThemeProvider } from '@mui/material/styles';
@@ -20,7 +23,6 @@ import { gtm } from './lib/gtm';
 import { store } from './store';
 import { createTheme } from './theme';
 import { createEmotionCache } from './utils/create-emotion-cache';
-import '../i18n';
 
 type EnhancedAppProps = AppProps & {
   Component: NextPage;
