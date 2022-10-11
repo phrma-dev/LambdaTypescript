@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Fab, Tooltip } from '@mui/material';
 import { Adjustments as AdjustmentsIcon } from '../icons/adjustments';
 import { SettingsDrawer } from './settings-drawer';

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
@@ -23,11 +23,11 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 
   return (
     <MainLayoutRoot>
-      <MainNavbar onOpenSidebar={(): void => setIsSidebarOpen(true)} /> 
+      <MainNavbar onOpenSidebar={(): void => setIsSidebarOpen(true)} />
       <MainSidebar
         onClose={(): void => setIsSidebarOpen(false)}
         open={isSidebarOpen}
-  />
+      />
       {children}
       <Footer />
     </MainLayoutRoot>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import { AppBar, Box, Button, Container, IconButton, Link, Toolbar } from '@mui/material';

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
 import { Box } from '@mui/material';
 import { Logo } from './logo';
 import { keyframes } from '@emotion/react';
