@@ -24,11 +24,10 @@ ReactDOM.render(
         </ul>
 
         <hr />
-        <Route exact path="/Dash" component={Dash} />
+        <Route path="/Dash" component={Dash} />
 
       </div>
   </BrowserRouter>,
-  rootElement);
-
+   document.getElementById("root"));
 registerServiceWorker();
 
