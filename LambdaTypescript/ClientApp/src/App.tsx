@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import Dash from './Pages/Dashboard/Dash';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+import MainNavbar from './Components/Nav';
 const App = () => {
 
   return (
@@ -19,6 +20,7 @@ const App = () => {
         </ul>
 
         <hr />
+        <MainNavbar />
         <Route path="/Dash" component={Dash} />
 
       </div>
