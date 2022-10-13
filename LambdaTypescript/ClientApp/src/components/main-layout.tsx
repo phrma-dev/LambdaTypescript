@@ -6,6 +6,7 @@ import { Footer } from './footer';
 import { MainNavbar } from './main-navbar';
 import { MainSidebar } from './main-sidebar';
 
+
 interface MainLayoutProps {
   children?: ReactNode;
 }
