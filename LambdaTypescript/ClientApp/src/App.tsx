@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import Dash from './Pages/Dashboard';
+import Dash from './Pages/Dashboard/Dash';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 const App = () => {
 
