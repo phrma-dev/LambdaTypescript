@@ -89,7 +89,7 @@ const getSections = (t: TFunction): Section[] => [
             {
                 title: t('File Explorer'),
                 path: '/Explorer',
-                icon: <MuiIcon.Dashboard fontSize="small" />,
+                icon: <MuiIcon.Folder fontSize="small" />,
             },
         ],
     },

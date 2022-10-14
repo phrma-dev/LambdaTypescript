@@ -6,7 +6,6 @@ import FileBrowser from '../../app/state-management/file-management/file-browser
 import BasicTimeline from '../../app/state-management/timeline/timeline';
 import HorizontalLinearStepper from '../../app/state-management/file-management/form-stepper/form-stepper';
 import { setCurrentGroupId } from '../../app/state-management/user/user-slice';
-
 import styles from './FileTable.module.scss';
 import { directoryContext, Folder } from '../contexts/directoryContext';
 import useApi from '../../hooks/useApi';
@@ -29,7 +28,10 @@ const FileTable: React.FC<FileTableProps> = ({ state }) => {
     const { dispatch, _getTeamDriveRootItems, _getTeamChannelDriveItems } = useApi(state);
     const { setCurrentFolder, isHome, setIsHome, setSelectedFile } = useContext(directoryContext);
 
-    const items: [] = isHome ? state.user.teams : state.user.channels;
+    // Mock file structure
+    // TODO: remove when API is functional
+    const items: any = [{ id: 'test123', displayName: 'test456' }];
+    // const items: [] = isHome ? state.user.teams : state.user.channels;
 
     const toggleDrawer = () => {
         dispatch(toggleRightDrawerIsOpen());

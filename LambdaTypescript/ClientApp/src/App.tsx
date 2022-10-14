@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme } from './theme';
 import Overview from './Components/Overview';
-import ContentContainer from './Components/fileExplorer/FileExplorer';
+import FileExplorer from './Pages/fileExplorer/FileExplorer';
 
 const App = () => {
     return (
@@ -23,7 +23,7 @@ const App = () => {
                     <Routes>
                         <Route path="/Dash" element={<Dash />} />
                         <Route path="/" element={<Overview />} />
-                        <Route path="/Explorer" element={<ContentContainer />} />
+                        <Route path="/Explorer" element={<FileExplorer />} />
                     </Routes>
                 </DashboardLayout>
             </ThemeProvider>

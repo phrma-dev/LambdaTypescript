@@ -98,7 +98,7 @@ const ContentContainer = () => {
     }, [state.drawer.bottomDrawerIsOpen]);
 
     return (
-        <DirectoryProvider home={''}>
+        <DirectoryProvider>
             <ReflexContainer orientation="horizontal">
                 <ReflexElement>
                     <ReflexContainer orientation="vertical">

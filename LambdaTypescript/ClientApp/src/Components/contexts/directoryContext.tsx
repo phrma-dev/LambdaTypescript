@@ -44,9 +44,9 @@ const defaultContext: DirectoryContext = {
 export const directoryContext = createContext<DirectoryContext>(defaultContext);
 const { Provider } = directoryContext;
 
-const DirectoryProvider: React.FC<{ home: any }> = ({ children, home }) => {
+const DirectoryProvider: React.FC = ({ children }) => {
     const [currentFolder, setCurrentFolder] = useState<Folder>({ name: '', id: '' });
-    const [path, setPath] = useState([home]);
+    const [path, setPath] = useState([{ name: '', id: '' }]);
     const [isHome, setIsHome] = useState<boolean>(true);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
