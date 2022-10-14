@@ -1,4 +1,6 @@
 ﻿import React from 'react';
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -16,10 +18,28 @@ import {
 
 import * as MuiIcon from '@mui/icons-material';
 
-
 const Dash = () => {
+  const [displayBanner, setDisplayBanner] = useState<boolean>(true);
 
-    return (
+
+
+  useEffect(() => {
+    // Restore the persistent state from local/session storage
+    const value = globalThis.sessionStorage.getItem('dismiss-banner');
+
+    if (value === 'true') {
+      // setDisplayBanner(false);
+    }
+  }, []);
+
+  const handleDismissBanner = () => {
+    // Update the persistent state
+    // globalThis.sessionStorage.setItem('dismiss-banner', 'true');
+    setDisplayBanner(false);
+  };
+
+  return (
+    <>
 
       <Box
         component="main"
@@ -37,15 +57,15 @@ const Dash = () => {
             >
               <Grid item>
                 <Typography variant="h4">
-                   You've routed to Dash
+                  You've Routed to Dash
                 </Typography>
               </Grid>
             </Grid>
           </Box>
+   
         </Container>
       </Box>
-    );
-  
-}
-
+    </>
+  );
+};
 export default Dash;
