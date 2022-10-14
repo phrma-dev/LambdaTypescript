@@ -14,7 +14,7 @@ const App = () => {
 		<BrowserRouter>
 			<ThemeProvider
 				theme={createTheme({
-					mode: 'dark'
+					mode: 'light'
 				})}
 			>
 				<CssBaseline />

@@ -4,12 +4,13 @@ import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import type { TFunction } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
-import type { Theme } from '@mui/material';
-import { Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link } from '@mui/material';
+import { ButtonBase, Theme } from '@mui/material';
+import { Avatar, Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link } from '@mui/material';
 import * as MuiIcon from '@mui/icons-material';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import { OrganizationPopover } from './organization-popover';
 import { Scrollbar } from './scrollbar';
+import { AccountPopover } from './account-popover';
 
 interface DashboardSidebarProps {
   onClose?: () => void;
@@ -29,6 +30,56 @@ interface Section {
   items: Item[];
 }
 
+const AccountButton = () => {
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const [openPopover, setOpenPopover] = useState<boolean>(false);
+  // To get the user from the authContext, you can use
+  // `const { user } = useAuth();`
+  const user = {
+    avatar: '/static/mock-images/avatars/avatar-anika_visser.png',
+    name: 'Anika Visser'
+  };
+
+  const handleOpenPopover = (): void => {
+    setOpenPopover(true);
+  };
+
+  const handleClosePopover = (): void => {
+    setOpenPopover(false);
+  };
+
+  return (
+    <>
+      <Box
+        component={ButtonBase}
+        onClick={handleOpenPopover}
+        ref={anchorRef}
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+          ml: 2
+        }}
+      >
+        <Avatar
+          sx={{
+            height: 40,
+            width: 40
+          }}
+          src={user.avatar}
+        >
+          <MuiIcon.VerifiedUser fontSize="small" />
+        </Avatar>
+      </Box>
+      <AccountPopover
+        anchorEl={anchorRef.current}
+        onClose={handleClosePopover}
+        open={openPopover}
+      />
+    </>
+  );
+};
+
+
 const getSections = (t: TFunction): Section[] => [
   {
     title: t('General'),
@@ -46,30 +97,30 @@ const getSections = (t: TFunction): Section[] => [
       }
     ]
   },
-  {
-    title: t('Management'),
-    items: [
-      {
-        title: t('Customers'),
-        path: '/dashboard/customers',
-        icon: <MuiIcon.VerifiedUser fontSize="small" />,
-        children: [
-          {
-            title: t('List'),
-            path: '/dashboard/customers'
-          },
-          {
-            title: t('Details'),
-            path: '/dashboard/customers/1'
-          },
-          {
-            title: t('Edit'),
-            path: '/dashboard/customers/1/edit'
-          }
-        ]
-      }
-    ]
-  }
+  //{
+  //  title: t('Management'),
+  //  items: [
+  //    {
+  //      title: t('Customers'),
+  //      path: '/dashboard/customers',
+  //      icon: <MuiIcon.VerifiedUser fontSize="small" />,
+  //      children: [
+  //        {
+  //          title: t('List'),
+  //          path: '/dashboard/customers'
+  //        },
+  //        {
+  //          title: t('Details'),
+  //          path: '/dashboard/customers/1'
+  //        },
+  //        {
+  //          title: t('Edit'),
+  //          path: '/dashboard/customers/1/edit'
+  //        }
+  //      ]
+  //    }
+  //  ]
+  //}
 ];
 
 export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
@@ -126,10 +177,11 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 href="/"
               >
           
-                  <img
+                <img
+                  src="https://nationalhealthcouncil.org/wp-content/uploads/2019/12/phrma_2012logo-02.jpg"
                     style={{
-                      height: 42,
-                      width: 42
+                      height: 96,
+                      borderRadius: 8
                     }}
                   />
               
@@ -137,8 +189,7 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             </Box>
             <Box sx={{ px: 2 }}>
               <Box
-                onClick={handleOpenOrganizationsPopover}
-                ref={organizationsRef}
+
                 sx={{
                   alignItems: 'center',
                   backgroundColor: 'rgba(255, 255, 255, 0.04)',
@@ -151,28 +202,8 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 }}
               >
                 <div>
-                  <Typography
-                    color="inherit"
-                    variant="subtitle1"
-                  >
-                    Acme Inc
-                  </Typography>
-                  <Typography
-                    color="neutral.400"
-                    variant="body2"
-                  >
-                    {t('Your tier')}
-                    {' '}
-                    : Premium
-                  </Typography>
+                 <AccountButton />
                 </div>
-                <MuiIcon.SelectAll
-                  sx={{
-                    color: 'neutral.500',
-                    width: 14,
-                    height: 14
-                  }}
-                />
               </Box>
             </Box>
           </div>
@@ -197,36 +228,36 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               />
             ))}
           </Box>
-          <Divider
-            sx={{
-              borderColor: '#2D3748'  // dark divider
-            }}
-          />
-          <Box sx={{ p: 2 }}>
-            <Typography
-              color="neutral.100"
-              variant="subtitle2"
-            >
-              {t('Need Help?')}
-            </Typography>
-            <Typography
-              color="neutral.500"
-              variant="body2"
-            >
-              {t('Check our docs')}
-            </Typography>
+          {/*<Divider*/}
+          {/*  sx={{*/}
+          {/*    borderColor: '#2D3748'  // dark divider*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/*<Box sx={{ p: 2 }}>*/}
+          {/*  <Typography*/}
+          {/*    color="neutral.100"*/}
+          {/*    variant="subtitle2"*/}
+          {/*  >*/}
+          {/*    {t('Need Help?')}*/}
+          {/*  </Typography>*/}
+          {/*  <Typography*/}
+          {/*    color="neutral.500"*/}
+          {/*    variant="body2"*/}
+          {/*  >*/}
+          {/*    {t('Check our docs')}*/}
+          {/*  </Typography>*/}
     
-              <Button
-                color="secondary"
-                component="a"
-                fullWidth
-                sx={{ mt: 2 }}
-                variant="contained"
-              >
-                {t('Documentation')}
-              </Button>
+          {/*    <Button*/}
+          {/*      color="secondary"*/}
+          {/*      component="a"*/}
+          {/*      fullWidth*/}
+          {/*      sx={{ mt: 2 }}*/}
+          {/*      variant="contained"*/}
+          {/*    >*/}
+          {/*      {t('Documentation')}*/}
+          {/*    </Button>*/}
             
-          </Box>
+          {/*</Box>*/}
         </Box>
       </Scrollbar>
       <OrganizationPopover

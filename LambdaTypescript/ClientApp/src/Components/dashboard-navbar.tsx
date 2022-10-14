@@ -73,21 +73,22 @@ const LanguageButton = () => {
         ref={anchorRef}
         sx={{ ml: 1 }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            height: 20,
-            width: 20,
-            '& img': {
-              width: '100%'
-            }
-          }}
-        >
-          <img
-            alt=""
-            src={languages[i18n.language as Language]}
-          />
-        </Box>
+        {/*<Box*/}
+        {/*  sx={{*/}
+        {/*    display: 'flex',*/}
+        {/*    height: 20,*/}
+        {/*    width: 20,*/}
+        {/*    '& img': {*/}
+        {/*      width: '100%'*/}
+        {/*    }*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <img*/}
+        {/*    alt=""*/}
+        {/*    src={languages[i18n.language as Language]}*/}
+        {/*  />*/}
+        {/*</Box>*/}
+        <MuiIcon.Flag fontSize="small" />
       </IconButton>
       <LanguagePopover
         anchorEl={anchorRef.current}
