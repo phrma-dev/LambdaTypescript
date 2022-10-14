@@ -1,0 +1,31 @@
+:global {
+    .MuiListItemIcon-root.MuiListItemIcon-alignItemsFlexStart {
+        margin-top: 0px;
+    }
+}
+
+.fileBrowser {
+    .muiList {
+        .muiListItem {
+            cursor: pointer;
+            max-width: 100%;
+            width: 100%;
+
+            .muiIcon {
+                font-size: 35px;
+                margin-top: 0px;
+            }
+        }
+    }
+
+    .muiAppBar {
+        .muiToolbar {
+            .muiIcon {
+                height: 20px;
+                width: 20px;
+                left: 0px;
+                top: 0px;
+            }
+        }
+    }
+}

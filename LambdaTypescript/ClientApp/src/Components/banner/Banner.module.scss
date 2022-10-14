@@ -1,0 +1,83 @@
+.muiToolbar {
+    border-bottom: 5px solid #2b88d2;
+    background: linear-gradient(270deg, #2b88d2, #1f334a, #1f334a, #1f334a);
+
+    .drawerToggle {
+        position: relative;
+        left: -25px;
+        cursor: pointer;
+        width: 60px;
+        z-index: 6;
+    }
+
+    .menu {
+        position: relative;
+        // top: 0%;
+        left: 5px;
+        width: 50px;
+        height: 64px;
+        padding: 15px;
+        z-index: 5;
+        cursor: pointer;
+
+        .hamburger {
+            cursor: pointer;
+            top: 50%;
+            left: 10px;
+            width: 30px;
+            height: 4px;
+            background: #fcfcfc;
+            position: absolute;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 4;
+        }
+
+        .hamburger:before {
+            top: 9px;
+        }
+
+        .hamburger:after {
+            top: -9px;
+        }
+
+        .hamburger:before,
+        .hamburger:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 4px;
+            background: #fcfcfc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+        }
+
+        .active.hamburger {
+            transform: rotate(0deg);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            height: 4px;
+            visibility: hidden;
+        }
+
+        .active.hamburger:before {
+            top: 4.25px;
+            right: 10px;
+            width: 15px;
+            height: 4px;
+            transform: rotate(-135deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+            visibility: visible;
+            z-index: 4;
+        }
+
+        .active.hamburger:after {
+            top: -4.25px;
+            right: 10px;
+            width: 15px;
+            height: 4px;
+            transform: rotate(-45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+            visibility: visible;
+            z-index: 4;
+        }
+    }
+}

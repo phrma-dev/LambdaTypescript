@@ -1,0 +1,10 @@
+.browse {
+  cursor: pointer;
+  color: #2a2828;
+  transition-duration: 1s; 
+  font-weight: 500;
+}
+.browse:hover {
+  text-decoration: underline;
+
+}
