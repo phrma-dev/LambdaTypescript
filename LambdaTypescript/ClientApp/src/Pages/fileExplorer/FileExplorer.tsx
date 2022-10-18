@@ -20,9 +20,10 @@ import FileTable from '../../Components/table/FileTable';
 import { toggleBottomDrawerIsOpen } from '../../app/state-management/drawer/drawer-slice';
 import { useAppSelector } from '../../app/state-management/hooks';
 import useApi from '../../hooks/useApi';
+import LeftPanel from '../../Components/sidePanel/LeftPanel';
 import styles from './FileExplorer.module.scss';
 
-const Dash = () => {
+const FileExplorer = () => {
     const state = useAppSelector((state) => state);
     const { dispatch } = useApi(state);
     const [leftPanelSize, setLeftPanelSize] = useState<number>(1);
@@ -98,19 +99,19 @@ const Dash = () => {
 
     return (
         <DirectoryProvider>
-            <ReflexContainer orientation="horizontal">
-                <ReflexElement>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    py: 8,
+                }}
+            >
+                <Container maxWidth="xl">
                     <DirectoryBreadcrumbs state={state} />
-                    {/* Test button for bottom drawer */}
-                    <Button onClick={toggleDrawer}>Expand Footer</Button>
                     <FileTable state={state} />
-                </ReflexElement>
-                <ReflexSplitter propagate className={!state.drawer.bottomDrawerIsOpen ? styles.hideSplitter : ''} />
-                <ReflexElement size={bottomPanelSize} direction={-1}>
-                    Footer
-                </ReflexElement>
-            </ReflexContainer>
+                </Container>
+            </Box>
         </DirectoryProvider>
     );
 };
-export default Dash;
+export default FileExplorer;

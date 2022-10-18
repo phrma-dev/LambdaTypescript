@@ -7,7 +7,7 @@ import styles from './FileExplorer.module.scss';
 import DirectoryProvider from '../contexts/directoryContext';
 import LeftPanel from '../sidePanel/LeftPanel';
 import RightPanel from '../sidePanel/RightPanel';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { toggleBottomDrawerIsOpen } from '../../app/state-management/drawer/drawer-slice';
 import useApi from '../../hooks/useApi';
 
@@ -99,40 +99,48 @@ const ContentContainer = () => {
 
     return (
         <DirectoryProvider>
-            <ReflexContainer orientation="horizontal">
-                <ReflexElement>
-                    <ReflexContainer orientation="vertical">
-                        <ReflexElement>
-                            <ReflexContainer orientation="vertical">
-                                <ReflexElement size={leftPanelSize}>
-                                    <LeftPanel />
-                                </ReflexElement>
-                                <ReflexSplitter
-                                    propagate
-                                    className={!state.drawer.leftDrawerIsOpen ? styles.hideSplitter : ''}
-                                />
-                                <ReflexElement className="middle-pane" flex={1}>
-                                    <DirectoryBreadcrumbs state={state} />
-                                    {/* Test button for bottom drawer */}
-                                    <Button onClick={toggleDrawer}>Expand Footer</Button>
-                                    <FileTable state={state} />
-                                </ReflexElement>
-                            </ReflexContainer>
-                        </ReflexElement>
-                        <ReflexSplitter
-                            propagate
-                            className={!state.drawer.rightDrawerIsOpen ? styles.hideSplitter : ''}
-                        />
-                        <ReflexElement size={rightPanelSize} direction={-1}>
-                            <RightPanel />
-                        </ReflexElement>
-                    </ReflexContainer>
-                </ReflexElement>
-                <ReflexSplitter propagate className={!state.drawer.bottomDrawerIsOpen ? styles.hideSplitter : ''} />
-                <ReflexElement size={bottomPanelSize} direction={-1}>
-                    Footer
-                </ReflexElement>
-            </ReflexContainer>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    py: 8,
+                }}
+            >
+                <ReflexContainer orientation="horizontal">
+                    <ReflexElement>
+                        <ReflexContainer orientation="vertical">
+                            <ReflexElement>
+                                <ReflexContainer orientation="vertical">
+                                    <ReflexElement size={leftPanelSize}>
+                                        <LeftPanel />
+                                    </ReflexElement>
+                                    <ReflexSplitter
+                                        propagate
+                                        className={!state.drawer.leftDrawerIsOpen ? styles.hideSplitter : ''}
+                                    />
+                                    <ReflexElement className="middle-pane" flex={1}>
+                                        <DirectoryBreadcrumbs state={state} />
+                                        {/* Test button for bottom drawer */}
+                                        <Button onClick={toggleDrawer}>Expand Footer</Button>
+                                        <FileTable state={state} />
+                                    </ReflexElement>
+                                </ReflexContainer>
+                            </ReflexElement>
+                            <ReflexSplitter
+                                propagate
+                                className={!state.drawer.rightDrawerIsOpen ? styles.hideSplitter : ''}
+                            />
+                            <ReflexElement size={rightPanelSize} direction={-1}>
+                                <RightPanel />
+                            </ReflexElement>
+                        </ReflexContainer>
+                    </ReflexElement>
+                    <ReflexSplitter propagate className={!state.drawer.bottomDrawerIsOpen ? styles.hideSplitter : ''} />
+                    <ReflexElement size={bottomPanelSize} direction={-1}>
+                        Footer
+                    </ReflexElement>
+                </ReflexContainer>
+            </Box>
         </DirectoryProvider>
     );
 };
