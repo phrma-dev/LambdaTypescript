@@ -1,14 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import registerServiceWorker from './registerServiceWorker';
 import App from './App';
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+import { Provider } from 'react-redux';
+import { store } from './app/state-management/store';
 
 ReactDOM.render(
-
-    <App />,
-   document.getElementById("root"));
-registerServiceWorker();
-
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);

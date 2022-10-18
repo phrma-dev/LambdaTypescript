@@ -7,18 +7,18 @@ import type { Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { SxProps } from '@mui/system';
 interface ScrollbarProps extends SimpleBar.Props {
-  ref: MutableRefObject<SimpleBar>;
-  sx?: SxProps<Theme>;
+    ref: MutableRefObject<SimpleBar>;
+    sx?: SxProps<Theme>;
 }
 
 const ScrollbarRoot = styled(SimpleBar)``;
 
 export const Scrollbar = forwardRef<MutableRefObject<SimpleBar>, ScrollbarProps>((props, ref) => {
-  return (
-    <ScrollbarRoot
-      // @ts-ignore
-      ref={ref}
-      {...props}
-    />
-  );
+    return (
+        <ScrollbarRoot
+            // @ts-ignore
+            ref={ref}
+            {...props}
+        />
+    );
 });

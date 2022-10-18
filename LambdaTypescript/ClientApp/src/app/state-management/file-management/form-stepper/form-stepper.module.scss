@@ -1,0 +1,13 @@
+:global {
+    .MuiStepIcon-root {
+        height: 1.5em !important;
+        width: 1.5em !important;
+    }
+    .MuiStepLabel-label {
+        font-size: 0.95rem !important;
+    }
+}
+.formStepperContainer {
+    max-width: 1200px;
+    margin: auto;
+}
