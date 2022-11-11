@@ -1,12 +1,12 @@
-import { createMicrosoftGraphClient, TeamsFx } from '@microsoft/teamsfx';
-import { useAppDispatch } from '../app/state-management/hooks';
-import { setUserTeams, setUserProfile, setUserCurrentFileItems } from '../app/state-management/user/user-slice';
 
-const teamsfx = new TeamsFx();
+import { useAppDispatch } from '../app/state-management/hooks';
+import { setUserTeams, setUserProfile, setUserCurrentFileItems, setUserPhoto } from '../app/state-management/user/user-slice';
+import axios from 'axios';
+
 
 const scopes = ['User.Read', 'User.ReadBasic.All', 'Files.ReadWrite.All', 'Directory.ReadWrite.All'];
 
-const graphClient = createMicrosoftGraphClient(teamsfx, scopes);
+
 
 const useApi = (state: any) => {
     const dispatch = useAppDispatch();
@@ -15,55 +15,94 @@ const useApi = (state: any) => {
      * Makes API call and returns the files and folders within a given folder
      * @param drive_id
      */
-    const _getTeamChannelDriveItems = async function (drive_id: string) {
-        let url =
-            '/groups/' +
-            state.user.currentGroupId +
-            '/drive/items/' +
-            drive_id +
-            '/children?$select=id,name,file,folder,webUrl';
-        const items = await graphClient.api(url).get();
-        dispatch(setUserCurrentFileItems(items.value));
-        console.log('folders: ', items);
+    async function _getTeamChannelDriveItems (_driveId: string) {
+      let url = "https://phrmadataapi.azurewebsites.net/Graph/GetTeamChannelDriveItems/" + state.user.currentGroupId + "/" + _driveId;
+      axios({
+        method: 'GET',
+        url: url,
+        headers: {
+          'apikey': 'phrm4-api-k3y-2022M11D11'
+        }
+      }).then((data) => {
+        dispatch(setUserCurrentFileItems(data.data));
+      });
     };
 
     /**
      * Makes API call and returns the subfolders within a specific Team
      * @param group_id
      */
-    const _getTeamDriveRootItems = async function (group_id: string) {
-        let url = '/groups/' + group_id + '/drive/root/children?$select=id,name,file,folder,webUrl';
-        const items = await graphClient.api(url).get();
-        dispatch(setUserCurrentFileItems(items.value));
+    async function _getTeamDriveRootItems(_groupId: string) {
+      let url = "https://phrmadataapi.azurewebsites.net/Graph/GetTeamDriveRootItems/" + _groupId;
+      axios({
+        method: 'GET',
+        url: url,
+        headers: {
+          'apikey': 'phrm4-api-k3y-2022M11D11'
+        }
+      }).then((data) => {
+        dispatch(setUserCurrentFileItems(data.data));
+      });
+ 
     };
 
+  async function _getUserPhoto(_userEmail: string) {
+      axios({
+        method: 'GET',
+        url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserPhoto/kdudley@phrma.org',
+        headers: {
+          'apikey': 'phrm4-api-k3y-2022M11D11'
+        }
+      }).then((data) => {
+        dispatch(setUserPhoto(data.data));
+        _getUserProfile(_userEmail);
+      });
+
+  }
+  async function _getUserProfile(_userEmail: string) {
+    axios({
+      method: 'GET',
+      url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserProfile/kdudley@phrma.org',
+      headers: {
+        'apikey': 'phrm4-api-k3y-2022M11D11'
+      }
+    }).then((data) => {
+      var result = JSON.parse(data.data);
+      dispatch(setUserProfile(result));
+    });
+
+  }
     //Returns a user's Teams
-    async function getTeams() {
-        const teams = await graphClient
-            .api('/me/joinedTeams?$select=id,displayName')
-            .get()
-            .catch((reason) => {
-                teamsfx.login(scopes);
-                teamsfx.getCredential().getToken(scopes);
-            });
-        dispatch(setUserTeams(teams.value));
+  async function _getUserTeams() {
+      var url = 'https://phrmadataapi.azurewebsites.net/Graph/GetUserTeams/' + state.user.userEmail
+      axios({
+        method: 'GET',
+        url: url,
+        headers: {
+          'apikey': 'phrm4-api-k3y-2022M11D11'
+        }
+      }).then((data) => {
+         dispatch(setUserTeams(data.data));
+      });
+       
     }
 
     //Returns a user's profile information
     async function getProfile() {
-        const profile = await graphClient
-            .api('/me')
-            .get()
-            .catch((reason) => {});
-        dispatch(setUserProfile(profile));
+        //const profile = await graphClient
+        //    .api('/me')
+        //    .get()
+        //    .catch((reason) => {});
+        //dispatch(setUserProfile(profile));
     }
 
     return {
         dispatch,
-        _getTeamChannelDriveItems,
-        _getTeamDriveRootItems,
-        getTeams,
-        getProfile,
+       _getTeamChannelDriveItems,
+       _getTeamDriveRootItems,
+       _getUserPhoto,
+       _getUserProfile,
+       _getUserTeams
     };
 };
 

@@ -8,6 +8,8 @@ import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import { OrganizationPopover } from '../organization-popover';
 import { Scrollbar } from '../scrollbar';
 import { AccountPopover } from '../account-popover';
+import { store } from '../../app/state-management/store';
+import { useAppDispatch, useAppSelector } from '../../app/state-management/hooks';
 
 interface DashboardSidebarProps {
     onClose?: () => void;
@@ -30,11 +32,14 @@ interface Section {
 const AccountButton = () => {
     const anchorRef = useRef<HTMLButtonElement | null>(null);
     const [openPopover, setOpenPopover] = useState<boolean>(false);
+  const state = useAppSelector((state: any) => state);
+  const dispatch = useAppDispatch();
     // To get the user from the authContext, you can use
     // `const { user } = useAuth();`
     const user = {
-        avatar: '/static/mock-images/avatars/avatar-anika_visser.png',
-        name: 'Anika Visser',
+      avatar: state.user.userPhoto,
+      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
+      officeLocation : state.user.profile["officeLocation"]
     };
 
     const handleOpenPopover = (): void => {
@@ -52,9 +57,9 @@ const AccountButton = () => {
                 onClick={handleOpenPopover}
                 ref={anchorRef}
                 sx={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    ml: 2,
+                    //alignItems: 'center',
+                    //display: 'flex',
+                    ml: 1,
                 }}
             >
                 <Avatar
@@ -65,7 +70,21 @@ const AccountButton = () => {
                     src={user.avatar}
                 >
                     <MuiIcon.VerifiedUser fontSize="small" />
-                </Avatar>
+          </Avatar>
+          <Box
+            sx={{
+              ml: 2,
+            }}
+          >
+            <Typography sx={{ textAlign: 'left' }} variant="body1">{user.name}</Typography>
+       
+         
+              <Typography color="textSecondary" variant="body1">
+              { user.officeLocation}
+              </Typography>
+           
+
+          </Box>
             </Box>
             <AccountPopover anchorEl={anchorRef.current} onClose={handleClosePopover} open={openPopover} />
         </>

@@ -12,7 +12,7 @@ import { ContactsPopover } from '../contacts-popover';
 import { ContentSearchDialog } from '../content-search-dialog';
 import { NotificationsPopover } from '../notifications-popover';
 import { LanguagePopover } from '../language-popover';
-
+import { useAppDispatch, useAppSelector } from '../../app/state-management/hooks';
 interface DashboardNavbarProps extends AppBarProps {
     onOpenSidebar?: () => void;
 }
@@ -164,13 +164,15 @@ const NotificationsButton = () => {
 };
 
 const AccountButton = () => {
+    const state = useAppSelector((state: any) => state);
     const anchorRef = useRef<HTMLButtonElement | null>(null);
     const [openPopover, setOpenPopover] = useState<boolean>(false);
     // To get the user from the authContext, you can use
     // `const { user } = useAuth();`
     const user = {
-        avatar: '/static/mock-images/avatars/avatar-anika_visser.png',
-        name: 'Anika Visser',
+      avatar: state.user.userPhoto,
+      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
+      officeLocation : state.user.profile["officeLocation"]
     };
 
     const handleOpenPopover = (): void => {

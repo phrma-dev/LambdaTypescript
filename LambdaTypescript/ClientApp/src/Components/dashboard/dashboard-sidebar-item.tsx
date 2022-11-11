@@ -1,7 +1,8 @@
 import React, { FC, ReactNode, useState } from 'react';
 import PropTypes from 'prop-types';
 import type { ListItemProps } from '@mui/material';
-import { Box, Button, Collapse, ListItem, Link } from '@mui/material';
+import { Box, Button, Collapse, ListItem,  } from '@mui/material';
+import { Link } from 'react-router-dom';
 import * as MuiIcon from '@mui/icons-material';
 
 interface DashboardSidebarItemProps extends ListItemProps {
@@ -93,9 +94,10 @@ export const DashboardSidebarItem: FC<DashboardSidebarItemProps> = (props) => {
                 py: 0,
                 px: 2,
             }}
-        >
+      >
+        <Link to={props.path!} style={{width: '100%'}} >
             <Button
-                href={props.path}
+                href="#"
                 component="a"
                 startIcon={icon}
                 endIcon={chip}
@@ -125,6 +127,8 @@ export const DashboardSidebarItem: FC<DashboardSidebarItemProps> = (props) => {
                 <Box sx={{ flexGrow: 1 }}>{title}</Box>
                 {info}
             </Button>
+        </Link>
+
         </ListItem>
     );
 };

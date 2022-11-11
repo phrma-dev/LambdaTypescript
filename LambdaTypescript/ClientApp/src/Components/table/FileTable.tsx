@@ -25,14 +25,16 @@ const TEAMS_IMAGE =
  * @param state
  */
 const FileTable: React.FC<FileTableProps> = ({ state }) => {
-    const { dispatch, _getTeamDriveRootItems, _getTeamChannelDriveItems } = useApi(state);
+    const { dispatch, _getTeamDriveRootItems, _getTeamChannelDriveItems, _getUserTeams } = useApi(state);
     const { setCurrentFolder, isHome, setIsHome, setSelectedFile } = useContext(directoryContext);
 
     // Mock file structure
     // TODO: remove when API is functional
-    const items: any = [{ id: 'test123', displayName: 'test456' }];
-    // const items: [] = isHome ? state.user.teams : state.user.channels;
-
+  React.useEffect(() => {
+    _getUserTeams();
+  }, []);
+    const items: [] = isHome ? state.user.teams : state.user.channels;
+  
     const toggleDrawer = () => {
         dispatch(toggleRightDrawerIsOpen());
     };

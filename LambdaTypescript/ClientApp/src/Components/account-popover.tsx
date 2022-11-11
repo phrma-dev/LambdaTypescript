@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { Avatar, Box, Divider, Link, ListItemIcon, ListItemText, MenuItem, Popover, Typography } from '@mui/material';
 
 import * as MuiIcon from '@mui/icons-material';
-
+import { useAppDispatch, useAppSelector } from '../app/state-management/hooks';
 interface AccountPopoverProps {
     anchorEl: null | Element;
     onClose?: () => void;
@@ -15,10 +15,13 @@ interface AccountPopoverProps {
 export const AccountPopover: FC<AccountPopoverProps> = (props) => {
     const { anchorEl, onClose, open, ...other } = props;
     // To get the user from the authContext, you can use
-    // `const { user } = useAuth();`
+  // `const { user } = useAuth();`  
+
+  const state = useAppSelector((state: any) => state);
     const user = {
-        avatar: '/static/mock-images/avatars/avatar-anika_visser.png',
-        name: 'Anika Visser',
+      avatar: state.user.userPhoto,
+      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
+      officeLocation:  state.user.profile["officeLocation"] 
     };
 
     return (
@@ -58,7 +61,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
                 >
                     <Typography variant="body1">{user.name}</Typography>
                     <Typography color="textSecondary" variant="body2">
-                        Acme Inc
+                      {user.officeLocation}
                     </Typography>
                 </Box>
             </Box>
