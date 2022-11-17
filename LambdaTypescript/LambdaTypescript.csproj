@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\api\DocumentAPI.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\api\GraphAPI.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\state-management\intranet-documents\intranet-documents-slice.ts" />
     <TypeScriptCompile Remove="ClientApp\src\authConfig.ts" />
     <TypeScriptCompile Remove="ClientApp\src\Components\main-layout.tsx" />

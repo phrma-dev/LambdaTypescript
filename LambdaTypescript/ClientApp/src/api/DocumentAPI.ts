@@ -6,10 +6,11 @@ const DocumentAPI = () => {
 	const dispatch = useAppDispatch();
 	const state = useAppSelector((state: any) => state);
 	const headers = { 'apikey': 'phrm4-api-k3y-2022M11D11' };
+	const baseApiUrl = "https://phrmadataapi.azurewebsites.net";
 	
 	async function _getFiles(_path: string) {
 		
-		let url = "https://localhost:5001/Document/GetItems";
+		let url = baseApiUrl + "/Document/GetItems";
 		let formData = new FormData();
 		formData.append("path", _path);
 		axios({
