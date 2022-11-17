@@ -6,6 +6,7 @@ import {
     Card,
     CardActions,
     CardContent,
+    CircularProgress,
     Container,
     Divider,
     Grid,
@@ -14,11 +15,35 @@ import {
     Typography,
 } from '@mui/material';
 import * as MuiIcon from '@mui/icons-material';
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal, useIsAuthenticated } from "@azure/msal-react";
+import { loginRequest } from "../authConfig";
+import { useAppDispatch, useAppSelector } from '../app/state-management/hooks';
+
 
 const Overview = () => {
+  const state = useAppSelector((state: any) => state);
+  const { instance, accounts } = useMsal();
+  const handleLogin = (loginType: string) => {
+    if (loginType === "popup") {
+      instance.loginPopup(loginRequest).then((data: any) => {
+
+      }).catch(e => {
+        console.log(e);
+      });
+    } else if (loginType === "redirect") {
+      instance.loginRedirect(loginRequest).then((data: any) => {
+   
+      }).catch(e => {
+        console.log(e);
+      });
+    }
+  }
     const [displayBanner, setDisplayBanner] = useState<boolean>(true);
 
-    useEffect(() => {
+  useEffect(() => {
+    if (state.user.userEmail == "") {
+      handleLogin("redirect");
+    }
         // Restore the persistent state from local/session storage
         const value = globalThis.sessionStorage.getItem('dismiss-banner');
 
@@ -33,8 +58,7 @@ const Overview = () => {
         setDisplayBanner(false);
     };
 
-    return (
-        <>
+  return (<>
             <Box
                 component="main"
                 sx={{
@@ -174,6 +198,7 @@ const Overview = () => {
                     </Grid>
                 </Container>
             </Box>
+        
         </>
     );
 };
