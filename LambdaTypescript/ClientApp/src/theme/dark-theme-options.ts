@@ -1,4 +1,4 @@
-import { ThemeOptions } from '@mui/material';
+import { ThemeOptions } from '@mui/material/styles';
 
 // Colors
 
@@ -174,7 +174,6 @@ export const darkThemeOptions: ThemeOptions = {
         error,
         info,
         mode: 'dark',
-        neutral,
         primary,
         secondary,
         success,

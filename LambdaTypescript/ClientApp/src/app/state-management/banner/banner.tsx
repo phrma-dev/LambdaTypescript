@@ -15,7 +15,7 @@ export default function OverviewBanner() {
         <Slide
             direction="down"
             in={state.banner.isOpen}
-            unmountOnExit
+            //unmountOnExit={true}
             timeout={{ enter: 1000, exit: 1000 }}
             easing={{ enter: theme.transitions.easing.easeOut, exit: theme.transitions.easing.easeOut }}
         >

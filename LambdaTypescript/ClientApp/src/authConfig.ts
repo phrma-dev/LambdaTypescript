@@ -13,8 +13,9 @@ import { LogLevel } from "@azure/msal-browser";
 export const msalConfig = {
     auth: {
     clientId: "9a8268d2-7008-41d2-b225-acd7c186918a",
-        authority: "https://login.microsoftonline.com/common",
-        redirectUri: "https://localhost:44397"
+      authority: "https://login.microsoftonline.com/common",
+      redirectUri: "https://localhost:44397",
+      //redirectUri: "https://deviasreact.azurewebsites.net"
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored

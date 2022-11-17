@@ -3,8 +3,6 @@ import { Box, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, 
 import { FileDownload } from '@mui/icons-material';
 import { Route, Routes } from 'react-router-dom';
 import FileBrowser from '../../app/state-management/file-management/file-browser/file-browser';
-import BasicTimeline from '../../app/state-management/timeline/timeline';
-import HorizontalLinearStepper from '../../app/state-management/file-management/form-stepper/form-stepper';
 import { setCurrentGroupId } from '../../app/state-management/user/user-slice';
 import styles from './FileTable.module.scss';
 import { directoryContext, Folder } from '../contexts/directoryContext';
@@ -112,8 +110,8 @@ const FileTable: React.FC<FileTableProps> = ({ state }) => {
                 </TableContainer>
                 <Box sx={{ p: 0, transitionDuration: '1s' }}>
                     <Routes>
-                        <Route path="upload" element={<HorizontalLinearStepper />} />
-                        <Route path="on" element={<BasicTimeline />} />
+        
+                       
                         <Route path="files" element={<FileBrowser />} />
                     </Routes>
                 </Box>

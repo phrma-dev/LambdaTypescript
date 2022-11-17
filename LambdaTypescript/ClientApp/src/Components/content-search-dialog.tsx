@@ -106,7 +106,7 @@ export const ContentSearchDialog: FC<ContentSearchProps> = (props) => {
                             ),
                         }}
                         label="Search"
-                        onChange={(event): void => setValue(event.target.value)}
+                        onChange={(event: any): void => setValue(event.target.value)}
                         placeholder="Search..."
                         sx={{ mt: 3 }}
                         value={value}

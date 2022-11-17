@@ -3,7 +3,8 @@ import 'simplebar/dist/simplebar.min.css';
 import type { MutableRefObject } from 'react';
 import { forwardRef } from 'react';
 import SimpleBar from 'simplebar-react';
-import type { Theme } from '@mui/material';
+import 'simplebar-react/dist/simplebar.min.css';
+import type { Theme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import type { SxProps } from '@mui/system';
 interface ScrollbarProps extends SimpleBar.Props {

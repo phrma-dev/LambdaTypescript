@@ -5,6 +5,7 @@ import UploaderReducer from './file-management/uploader/uploader-slice';
 import NavBreadcrumbsReducer from './nav-breadcrumbs/nav-breadcrumbs-slice';
 import FileBrowserReducer from './file-management/file-browser/file-browser-slice';
 import UserReducer from './user/user-slice';
+import IntranetDocumentsReducer from './intranet-documents/intranet-documents-slice';
 
 import { fileManagementServicesSlice } from './file-management/services/file-management-services-slice';
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
         navBreadcrumbs: NavBreadcrumbsReducer,
         [fileManagementServicesSlice.reducerPath]: fileManagementServicesSlice.reducer,
         user: UserReducer,
+        intranetDocuments: IntranetDocumentsReducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(fileManagementServicesSlice.middleware);

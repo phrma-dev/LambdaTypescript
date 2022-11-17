@@ -1,4 +1,4 @@
-import type { Direction, Theme } from '@mui/material';
+import type { Direction, Theme } from '@mui/material/styles';
 import { createTheme as createMuiTheme, responsiveFontSizes } from '@mui/material/styles';
 import { baseThemeOptions } from './base-theme-options';
 import { darkThemeOptions } from './dark-theme-options';

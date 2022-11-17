@@ -1,4 +1,5 @@
-﻿import React, { useEffect } from 'react';
+﻿/* eslint-disable no-unused-expressions */
+import React, { useEffect } from 'react';
 import Dash from './Pages/Dashboard/Dash';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import DashboardLayout from './Components/dashboard/dashboard-layout';
@@ -7,8 +8,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from './theme';
 import Overview from './Components/Overview';
 import FileExplorer from './Pages/fileExplorer/FileExplorer';
+import ITToolkit from './Pages/ITToolkit/ITToolkit';
 import axios from 'axios';
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { loginRequest } from "./authConfig";
 import { store } from './app/state-management/store';
 import { useAppDispatch, useAppSelector } from './app/state-management/hooks';
@@ -16,29 +18,44 @@ import { setUserEmail } from './app/state-management/user/user-slice';
 import useApi from './hooks/useApi';
 import { Grid, CssBaseline, Typography, Box, Paper, Avatar, TextField, Button } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
+
 import ReactPlayer from 'react-player';
+
 const App = () => {
   const { instance, accounts } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const { _getUserPhoto, _getUserProfile, _getUserTeams } = useApi(state);
   React.useEffect(() => {
-  var accountInterval = setInterval(() => {
-    if (accounts.length > 0) {
-      console.info(accounts);
-      dispatch(setUserEmail(accounts[0].username.toLowerCase()));
-      _getUserPhoto(accounts[0].username);
-      clearInterval(accountInterval);
+    var id = intervalTrigger();
+    var count = 0;
+    function intervalTrigger() {
+      return window.setInterval(function () {
+        if (state.user.userEmail == "" && accounts.length > 0) {
+          console.info(accounts);
+          dispatch(setUserEmail(accounts[0].username.toLowerCase()));
+          _getUserPhoto(accounts[0].username);
+          window.clearInterval(id);
+        } else {
+          console.info("Searching for user .... ");
+          console.log(accounts.length);
+          count++;
+          if (count > 2) {
+            window.location.href = window.location.origin;
+          }
+        }
+        if (state.user.userEmail != "") {
+          console.info("INTERVAL CLEARED");
+          window.clearInterval(id);
+        }
+      }, 500);
+    };
 
-    } else {
-      console.info("Searching for user .... ");
-    }
-
-  }, 3000);
-
-
-    accountInterval;
   }, []);
+
+ 
+  
   const handleLogin = (loginType: string) => {
     if (loginType === "popup") {
       instance.loginPopup(loginRequest).catch(e => {
@@ -47,8 +64,6 @@ const App = () => {
     } else if (loginType === "redirect") {
       instance.loginRedirect(loginRequest).then(() => {
         
-   
-
       }).catch(e => {
         console.log(e);
       });
@@ -129,6 +144,7 @@ const App = () => {
                         <Route path="/Dash" element={<Dash />} />
                         <Route path="/" element={<Overview />} />
                         <Route path="/Explorer" element={<FileExplorer />} />
+                        <Route path="/ITToolkit" element={<ITToolkit />} />
                     </Routes>
                 </DashboardLayout>
             </ThemeProvider>

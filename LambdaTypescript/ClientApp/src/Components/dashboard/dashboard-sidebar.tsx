@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TFunction, useTranslation } from 'react-i18next';
-import { ButtonBase, Theme } from '@mui/material';
-import { Avatar, Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link } from '@mui/material';
+import { Theme } from '@mui/material/styles';
+import { Avatar, Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link, ButtonBase } from '@mui/material';
 import * as MuiIcon from '@mui/icons-material';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import { OrganizationPopover } from '../organization-popover';
@@ -109,7 +109,12 @@ const getSections = (t: TFunction): Section[] => [
                 title: t('File Explorer'),
                 path: '/Explorer',
                 icon: <MuiIcon.Folder fontSize="small" />,
-            },
+          },
+          {
+            title: t('IT Toolkit'),
+            path: '/ITToolkit',
+            icon: <MuiIcon.Folder fontSize="small" />,
+          },
         ],
     },
     //{
@@ -281,7 +286,7 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                         backgroundColor: 'neutral.900',
                         borderRightColor: 'divider',
                         borderRightStyle: 'solid',
-                        borderRightWidth: (theme) => (theme.palette.mode === 'dark' ? 1 : 0),
+                        borderRightWidth: (theme: any) => (theme.palette.mode === 'dark' ? 1 : 0),
                         color: '#FFFFFF',
                         width: 280,
                     },

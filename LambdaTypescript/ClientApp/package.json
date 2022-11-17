@@ -5,8 +5,8 @@
   "dependencies": {
     "@azure/msal-browser": "^2.26.0",
     "@azure/msal-react": "^1.4.2",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@fluentui/react-northstar": "^0.63.1",
     "@fontsource/roboto": "^4.5.7",
     "@microsoft/mgt": "^2.5.2",
@@ -73,6 +73,7 @@
     "typescript": "4.8.4"
   },
   "devDependencies": {
+    "@types/date-fns": "^2.6.0",
     "@types/jquery": "^3.5.14",
     "ajv": "^6.9.1",
     "cross-env": "^5.2.0",

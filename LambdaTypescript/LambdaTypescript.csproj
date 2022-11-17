@@ -30,8 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\api\DocumentAPI.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\state-management\intranet-documents\intranet-documents-slice.ts" />
     <TypeScriptCompile Remove="ClientApp\src\authConfig.ts" />
     <TypeScriptCompile Remove="ClientApp\src\Components\main-layout.tsx" />
+    <TypeScriptCompile Remove="ClientApp\src\Pages\ITToolkit\ITToolkit.tsx" />
     <TypeScriptCompile Remove="ClientApp\src\Pages\Login\Login.tsx" />
   </ItemGroup>
 
