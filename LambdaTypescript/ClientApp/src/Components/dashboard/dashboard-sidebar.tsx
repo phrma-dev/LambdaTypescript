@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'reac
 import PropTypes from 'prop-types';
 import { TFunction, useTranslation } from 'react-i18next';
 import { Theme } from '@mui/material/styles';
-import { Avatar, Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link, ButtonBase } from '@mui/material';
+import { Avatar, Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery, Link, ButtonBase, CircularProgress } from '@mui/material';
 import * as MuiIcon from '@mui/icons-material';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import { OrganizationPopover } from '../organization-popover';
@@ -37,9 +37,9 @@ const AccountButton = () => {
     // To get the user from the authContext, you can use
     // `const { user } = useAuth();`
     const user = {
-      avatar: state.user.userPhoto,
-      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
-      officeLocation : state.user.profile["officeLocation"]
+      avatar: state.user.profile.userPhoto,
+      name: state.user.profile.firstName + " " + state.user.profile.lastName,
+      officeLocation : state.user.profile.officeLocation
     };
 
     const handleOpenPopover = (): void => {
@@ -61,26 +61,28 @@ const AccountButton = () => {
                     //display: 'flex',
                     ml: 1,
                 }}
+        >
+        
+            <Avatar
+              sx={{
+                height: 40,
+                width: 40,
+              }}
+              src={user.avatar}
             >
-                <Avatar
-                    sx={{
-                        height: 40,
-                        width: 40,
-                    }}
-                    src={user.avatar}
-                >
-                    <MuiIcon.VerifiedUser fontSize="small" />
-          </Avatar>
+              <MuiIcon.VerifiedUser fontSize="small" />
+            </Avatar>
+        
           <Box
             sx={{
               ml: 2,
             }}
           >
-            <Typography sx={{ textAlign: 'left' }} variant="body1">{user.name}</Typography>
+            <Typography sx={{ textAlign: 'left' }} variant="body1">{user.name }</Typography>
        
          
               <Typography color="textSecondary" variant="body1">
-              { user.officeLocation}
+              {user.officeLocation}
               </Typography>
            
 

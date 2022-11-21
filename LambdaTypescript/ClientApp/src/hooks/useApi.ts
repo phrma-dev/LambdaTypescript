@@ -1,6 +1,6 @@
 
 import { useAppDispatch } from '../app/state-management/hooks';
-import { setUserTeams, setUserProfile, setUserCurrentFileItems, setUserPhoto } from '../app/state-management/user/user-slice';
+import { setUserTeams, setUserProfile, setUserCurrentFileItems } from '../app/state-management/user/user-slice';
 import axios from 'axios';
 
 
@@ -54,7 +54,7 @@ const useApi = (state: any) => {
           'apikey': 'phrm4-api-k3y-2022M11D11'
         }
       }).then((data) => {
-        dispatch(setUserPhoto(data.data));
+       // dispatch(setUserPhoto(data.data));
         _getUserProfile(_userEmail);
       });
 

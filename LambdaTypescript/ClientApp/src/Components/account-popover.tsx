@@ -19,9 +19,9 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
 
   const state = useAppSelector((state: any) => state);
     const user = {
-      avatar: state.user.userPhoto,
-      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
-      officeLocation:  state.user.profile["officeLocation"] 
+      avatar: state.user.profile.userPhoto,
+      name: state.user.profile.firstName + " " + state.user.profile.lastName,
+      officeLocation:  state.user.profile.officeLocation
     };
 
     return (
@@ -44,16 +44,18 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
                     p: 2,
                     display: 'flex',
                 }}
+        >
+     
+            <Avatar
+              src={user.avatar}
+              sx={{
+                height: 40,
+                width: 40,
+              }}
             >
-                <Avatar
-                    src={user.avatar}
-                    sx={{
-                        height: 40,
-                        width: 40,
-                    }}
-                >
-                    <MuiIcon.VerifiedUser fontSize="small" />
-                </Avatar>
+              <MuiIcon.VerifiedUser fontSize="small" />
+            </Avatar>
+
                 <Box
                     sx={{
                         ml: 1,

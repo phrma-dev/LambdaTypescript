@@ -45,6 +45,7 @@
     "isomorphic-fetch": "^3.0.0",
     "jquery": "~3.6.0",
     "merge": "^2.1.1",
+    "numeral": "^2.0.6",
     "oidc-client": "~1.11.5",
     "pdfjs-dist": "^2.6.347",
     "prettier": "^2.7.1",
@@ -75,6 +76,7 @@
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/jquery": "^3.5.14",
+    "@types/numeral": "^2.0.2",
     "ajv": "^6.9.1",
     "cross-env": "^5.2.0",
     "eslint": "8.25.0",

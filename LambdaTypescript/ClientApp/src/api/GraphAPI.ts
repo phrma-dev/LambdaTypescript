@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../app/state-management/hooks';
 import { setCurrentFilePath, setFiles } from '../app/state-management/intranet-documents/intranet-documents-slice';
 import axios from 'axios';
-import { setUserTeams, setUserProfile, setUserCurrentFileItems, setUserPhoto } from '../app/state-management/user/user-slice';
+import { setUserTeams, setUserProfile, setUserCurrentFileItems } from '../app/state-management/user/user-slice';
 
 const GraphAPI = () => {
 	const dispatch = useAppDispatch();
@@ -46,29 +46,32 @@ const GraphAPI = () => {
 
   };
 
-  async function _getUserPhoto(_userEmail: string) {
-    axios({
-      method: 'GET',
-      url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserPhoto/kdudley@phrma.org',
-      headers: {
-        'apikey': 'phrm4-api-k3y-2022M11D11'
-      }
-    }).then((data) => {
-      dispatch(setUserPhoto(data.data));
-      _getUserProfile(_userEmail);
-    });
+  //async function _getUserPhoto(_userEmail: string) {
+  //  axios({
+  //    method: 'GET',
+  //    url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserPhoto/kdudley@phrma.org',
+  //    headers: {
+  //      'apikey': 'phrm4-api-k3y-2022M11D11'
+  //    }
+  //  }).then((data) => {
+  //    dispatch(setUserPhoto(data.data));
+  //    _getUserProfile(_userEmail);
+  //  });
 
-  }
+  //}
+
   async function _getUserProfile(_userEmail: string) {
     axios({
       method: 'GET',
-      url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserProfile/kdudley@phrma.org',
+      url: 'https://phrmadataapi.azurewebsites.net/Graph/GetUserProfile/' + _userEmail,
       headers: {
         'apikey': 'phrm4-api-k3y-2022M11D11'
       }
     }).then((data) => {
-      var result = JSON.parse(data.data);
+      console.info(data.data);
+      var result = data.data.value;
       dispatch(setUserProfile(result));
+  
     });
 
   }
@@ -100,7 +103,7 @@ const GraphAPI = () => {
     dispatch,
     _getTeamChannelDriveItems,
     _getTeamDriveRootItems,
-    _getUserPhoto,
+    // _getUserPhoto,
     _getUserProfile,
     _getUserTeams
   };

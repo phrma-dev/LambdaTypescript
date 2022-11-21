@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import type { AppBarProps } from '@mui/material';
+import { AppBarProps, CircularProgress } from '@mui/material';
 import { AppBar, Avatar, Badge, Box, ButtonBase, IconButton, Toolbar, Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import * as MuiIcon from '@mui/icons-material';
@@ -13,8 +13,9 @@ import { ContentSearchDialog } from '../content-search-dialog';
 import { NotificationsPopover } from '../notifications-popover';
 import { LanguagePopover } from '../language-popover';
 import { useAppDispatch, useAppSelector } from '../../app/state-management/hooks';
+import { setPreferredTheme } from '../../app/state-management/user/user-slice';
 import { Menu as MenuIcon, Alarm as BellIcon, Search as SearchIcon, SupervisedUserCircle as UserCircle, SupervisedUserCircle as UsersIcon } from '@mui/icons-material';
-
+import * as muiIcons from '@mui/icons-material';
 
 
 
@@ -26,9 +27,9 @@ const AccountButton = () => {
     // To get the user from the authContext, you can use
     // `const { user } = useAuth();`
     const user = {
-      avatar: state.user.userPhoto,
-      name: state.user.profile["givenName"] + " " + state.user.profile["surname"],
-      officeLocation : state.user.profile["officeLocation"]
+      avatar: state.user.profile.userPhoto,
+      name: state.user.profile.firstName + " " + state.user.profile.lastName,
+      officeLocation : state.user.profile.officeLocation
     };
 
     const handleOpenPopover = (): void => {
@@ -50,16 +51,19 @@ const AccountButton = () => {
                     display: 'flex',
                     ml: 2,
                 }}
-            >
-                <Avatar
-                    sx={{
-                        height: 40,
-                        width: 40,
-                    }}
-                    src={user.avatar}
-                >
-                    <MuiIcon.VerifiedUser fontSize="small" />
-                </Avatar>
+        >
+ 
+              <Avatar
+                sx={{
+                  height: 40,
+                  width: 40,
+                }}
+                src={user.avatar}
+              >
+                <MuiIcon.VerifiedUser fontSize="small" />
+              </Avatar>
+              
+           
             </Box>
             <AccountPopover anchorEl={anchorRef.current} onClose={handleClosePopover} open={openPopover} />
         </>
@@ -79,24 +83,47 @@ const languages: Record<Language, string> = {
   es: '/static/icons/es_flag.svg'
 };
 
-const DashboardNavbarRoot = styled(AppBar)(
-  ({ theme }) => ({
-    backgroundColor: theme.palette.background.paper,
-    ...(
-      theme.palette.mode === 'light'
-        ? {
-          boxShadow: theme.shadows[3]
-        }
-        : {
-          backgroundColor: theme.palette.background.paper,
-          borderBottomColor: theme.palette.divider,
-          borderBottomStyle: 'solid',
-          borderBottomWidth: 1,
-          boxShadow: 'none'
-        }
-    )
-  })
-);
+const DashboardNavbarRoot =
+  styled(AppBar)(
+    ({ theme }) => ({
+      backgroundColor: theme.palette.background.paper,
+      ...(
+        theme.palette.mode == "light"
+          ? {
+            boxShadow: theme.shadows[3]
+          }
+          : {
+            backgroundColor: theme.palette.background.paper,
+            borderBottomColor: theme.palette.divider,
+            borderBottomStyle: 'solid',
+            borderBottomWidth: 1,
+            boxShadow: 'none'
+          }
+      )
+    })
+  );
+
+
+ 
+
+
+
+const ThemeToggleButton = () => {
+  const state = useAppSelector((state: any) => state);
+  const dispatch = useAppDispatch();
+  return (
+    <>
+      <IconButton
+        onClick={() => {
+          dispatch(setPreferredTheme(state.user.userPreferences.themeMode == 'light' ? 'dark' : 'light'))
+        }}
+        sx={{ ml: 1 }}
+         >
+        <muiIcons.ShieldMoonOutlined />
+      </IconButton>
+    </>
+  )
+}
 
 const LanguageButton = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -251,7 +278,7 @@ const NotificationsButton = () => {
 
 export const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
   const { onOpenSidebar, ...other } = props;
-
+  const state = useAppSelector((state: any) => state);
   return (
     <>
       <DashboardNavbarRoot
@@ -285,7 +312,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
             <MenuIcon fontSize="small" />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <LanguageButton />
+          <ThemeToggleButton />
           <ContentSearchButton />
           <ContactsButton />
           <NotificationsButton />

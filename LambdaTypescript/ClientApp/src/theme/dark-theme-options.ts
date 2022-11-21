@@ -174,6 +174,7 @@ export const darkThemeOptions: ThemeOptions = {
         error,
         info,
         mode: 'dark',
+        neutral,
         primary,
         secondary,
         success,

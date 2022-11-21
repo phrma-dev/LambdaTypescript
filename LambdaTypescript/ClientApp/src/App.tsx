@@ -8,7 +8,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from './theme';
 import Overview from './Components/Overview';
 import FileExplorer from './Pages/fileExplorer/FileExplorer';
-import ITToolkit from './Pages/ITToolkit/ITToolkit';
+import ITToolkit from './Pages/Intranet-Toolkits/ITToolkit/ITToolkit';
 import axios from 'axios';
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { loginRequest } from "./authConfig";
@@ -59,7 +59,7 @@ const Login = () => {
 
         }}
       >
-        {/*          <video src="https://phrmadataapi.azurewebsites.net/assets/phrmawharf.mp4" autoPlay={true} loop muted style={{ width: '59vw', height: '99vh' }} />*/}
+       
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
@@ -104,7 +104,7 @@ const App = () => {
   const isAuthenticated = useIsAuthenticated();
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const { _getUserPhoto, _getUserProfile, _getUserTeams } = GraphAPI();
+  const { _getUserProfile } = GraphAPI();
   const handleLogin = (loginType: string) => {
     if (loginType === "popup") {
       instance.loginPopup(loginRequest).then((data: any) => {
@@ -130,7 +130,7 @@ const App = () => {
         if (state.user.userEmail == "" && accounts.length > 0) {
           console.info(accounts);
           dispatch(setUserEmail(accounts[0].username.toLowerCase()));
-          _getUserPhoto(accounts[0].username);
+          _getUserProfile(accounts[0].username.toLowerCase());
           window.clearInterval(id);
         }
    
@@ -155,7 +155,7 @@ const App = () => {
 
           <ThemeProvider
             theme={createTheme({
-              mode: 'light',
+              mode: state.user.userPreferences.themeMode,
             })}
           >
             <CssBaseline />
