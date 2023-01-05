@@ -18,9 +18,9 @@ import { setUserEmail } from './app/state-management/user/user-slice';
 import GraphAPI from './api/GraphAPI';
 import { Grid, CssBaseline, Typography, Box, Paper, Avatar, TextField, Button } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
-
+import Video from './atoms.mp4';
 import ReactPlayer from 'react-player';
-
+import './react-player.css';
 
 
 const Login = () => {
@@ -59,7 +59,11 @@ const Login = () => {
 
         }}
       >
-       
+        <div className='player-wrapper2' style={{ height: '100% !important', width: '100% !important' }} >
+          <ReactPlayer className="react-player2" url='/static/videos/atoms.mp4'
+            style={{height: '100%', width: '100%'}}
+              autoPlay playsinline loop playing muted />
+        </div>
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
@@ -75,7 +79,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign in 2
           </Typography>
 
           <Button
@@ -88,9 +92,8 @@ const Login = () => {
 
             }}
           >
-            Sign In
+            Sign In 2
           </Button>
-
 
 
         </Box>

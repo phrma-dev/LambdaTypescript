@@ -7,8 +7,10 @@ import { useAppDispatch, useAppSelector } from '../../app/state-management/hooks
 import { setUserEmail } from '../../app/state-management/user/user-slice';
 import useApi from '../../hooks/useApi';
 import { useMsal } from "@azure/msal-react";
-
+import video from '../../../public/static/videos/atoms.mp4';
 const Login = () => {
+
+  
   const { instance, accounts } = useMsal();
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
@@ -60,6 +62,7 @@ const Login = () => {
           backgroundPosition: 'center',
         }}
       />
+
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -74,7 +77,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign in 2
           </Typography>
 
           <Button
@@ -86,7 +89,7 @@ const Login = () => {
               handleLogin("redirect");
             }}
           >
-            Sign In
+            Sign In 2
           </Button>
 
 

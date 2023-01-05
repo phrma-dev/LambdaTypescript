@@ -73,19 +73,23 @@ export const UploadFile = (files: any[], filePath: any[], previewImage: string) 
     //console.log($("#file")[0].files[0]);
 
     let path = filePath.length === 0 ? 'root' : filePath.join('/');
-    formData.append('path', path);
+  formData.append('path', path);
+  var returned = 
     axios({
         method: 'post',
         url: 'https://phrmadataapi.azurewebsites.net/Document/UploadFile',
         data: formData,
     })
         .then(function (response) {
-            return response.data;
-            //console.log(response);
+          returned = response.data;
+          console.log(response);
+          return response.data;
         })
         .catch(function (error) {
             console.log(error);
         });
+  console.log(returned);
+  return returned;
 };
 
 export const GetItems = (path: any) => {

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
 import { Avatar, Box, Divider, Link, ListItemIcon, ListItemText, MenuItem, Popover, Typography } from '@mui/material';
-
+import { useMsal } from '@azure/msal-react';
 import * as MuiIcon from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../app/state-management/hooks';
 interface AccountPopoverProps {
@@ -13,6 +13,16 @@ interface AccountPopoverProps {
 }
 
 export const AccountPopover: FC<AccountPopoverProps> = (props) => {
+
+  const { instance } = useMsal();
+
+  const handleLogout = (logoutType: any) => {
+    if (logoutType === "redirect") {
+      instance.logoutRedirect({
+        postLogoutRedirectUri: "/",
+      });
+    }
+  }
     const { anchorEl, onClose, open, ...other } = props;
     // To get the user from the authContext, you can use
   // `const { user } = useAuth();`  
@@ -69,33 +79,38 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
             </Box>
             <Divider />
             <Box sx={{ my: 1 }}>
-                <MenuItem component="a" href="/dashboard/social/profile">
-                    <ListItemIcon>
-                        <MuiIcon.VerifiedUser fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary={<Typography variant="body1">Profile</Typography>} />
-                </MenuItem>
+                {/*<MenuItem component="a" href="/dashboard/social/profile">*/}
+                {/*    <ListItemIcon>*/}
+                {/*        <MuiIcon.VerifiedUser fontSize="small" />*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary={<Typography variant="body1">Profile</Typography>} />*/}
+                {/*</MenuItem>*/}
 
-                <MenuItem component="a" href="/dashboard/account">
-                    <ListItemIcon>
-                        <MuiIcon.Settings fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary={<Typography variant="body1">Settings</Typography>} />
-                </MenuItem>
+                {/*<MenuItem component="a" href="/dashboard/account">*/}
+                {/*    <ListItemIcon>*/}
+                {/*        <MuiIcon.Settings fontSize="small" />*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary={<Typography variant="body1">Settings</Typography>} />*/}
+                {/*</MenuItem>*/}
 
-                <MenuItem component="a" href="/dashboard">
-                    <ListItemIcon>
-                        <MuiIcon.SwitchLeftOutlined fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary={<Typography variant="body1">Change organization</Typography>} />
-                </MenuItem>
+                {/*<MenuItem component="a" href="/dashboard">*/}
+                {/*    <ListItemIcon>*/}
+                {/*        <MuiIcon.SwitchLeftOutlined fontSize="small" />*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary={<Typography variant="body1">Change organization</Typography>} />*/}
+                {/*</MenuItem>*/}
 
-                <Divider />
-                <MenuItem>
-                    <ListItemIcon>
+                {/*<Divider />*/}
+          <MenuItem
+            onClick={() => { handleLogout("redirect"); }}
+          >
+          
+                <ListItemIcon>
                         <MuiIcon.Logout fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary={<Typography variant="body1">Logout</Typography>} />
+          
+    
                 </MenuItem>
             </Box>
         </Popover>
